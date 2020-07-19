@@ -33,8 +33,8 @@ export class DbConnection {
     query: string | Query,
     data = {},
   ): Promise<GremlinResponse<T>> {
-    let q = query instanceof Query ? query.toString() : query
-    return await this.client.submit(q, data)
+    let strQuery = query instanceof Query ? query.toString() : query
+    return await this.client.submit(strQuery, data)
   }
 
   async use(callback: (db: DbConnection) => void): Promise<void> {
@@ -46,11 +46,11 @@ export class DbConnection {
     await this.close()
   }
 
-  async execute(query: string | Query) {
+  async execute<T>(query: string | Query): Promise<GremlinResponse<T>> {
     let r = null
 
-    await this.use(async db => {
-      r = await db.runQuery(query)
+    await this.use(async graph => {
+      r = await graph.runQuery(query)
     })
 
     return r
