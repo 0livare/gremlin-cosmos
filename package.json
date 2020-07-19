@@ -2,8 +2,18 @@
   "name": "gremlin-cosmos",
   "version": "0.0.0",
   "description": "A Node.js Gremlin API compatible with Cosmos DB",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/zposten/gremlin-cosmos",
   "author": "Zach Posten <zach@posten.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^5.0.2",
+    "rollup": "^2.22.1",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.7"
+  }
 }
