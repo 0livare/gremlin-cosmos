@@ -4,7 +4,6 @@
     "outDir": "dist",            // Output files to the dist directory -- duplicated from rollup config for source maps
     "sourceMap": true,           // Automatically generate source map files
     "declaration": true,         // Automatically generate .d.ts files
-    "noImplicitAny": true,       // Raise an error for expressions with an implied `any` type
     "target": "es6",             // Compile files into an es6 format
     "moduleResolution": "node",  // Search under node_modules for non-relative imports
     "esModuleInterop": true      // Import non-ES modules as default imports
