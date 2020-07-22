@@ -25,14 +25,4 @@ export type GremlinResponse<T> = {
   }
 }
 
-// import {Context as defaultContext, HttpRequest} from '@azure/functions'
-
-// export {HttpRequest}
-
-// export type Context = defaultContext & {
-//   res: {
-//     status: number
-//     body?: string
-//     [key: string]: any
-//   }
-// }
+export type Index = {[key: string]: string}
