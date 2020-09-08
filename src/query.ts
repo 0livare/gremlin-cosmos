@@ -17,8 +17,8 @@ export class Query {
   /////////////////////
 
   /** Get all vertices, or the vertex with a specific id. */
-  V(id?: string) {
-    this.query += `.V(${quoteAndCombine(id)})`
+  V(ids?: string | string[]) {
+    this.query += `.V(${quoteAndCombine(ids)})`
     return this
   }
 
