@@ -217,7 +217,7 @@ export class Query {
    * to only those with one of the provided labels.
    */
   hasLabel(...labels: string[]) {
-    this.query += `hasLabel(${quoteAndCombine(labels)})`
+    this.query += `.hasLabel(${quoteAndCombine(labels)})`
     return this
   }
 
