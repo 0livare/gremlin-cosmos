@@ -27,7 +27,12 @@ This library provides:
 ## Example Usage
 
 ```ts
-import {DbConnection, Query, GremlinElement} from 'gremlin-cosmos'
+import {
+  DbConnection,
+  Query,
+  GremlinResponse,
+  GremlinElement,
+} from 'gremlin-cosmos'
 
 let db = new DbConnection({
   endpoint: 'wss://my-cosmos-1.gremlin.cosmos.azure.com:443',
@@ -38,21 +43,26 @@ let db = new DbConnection({
 
 let query = Query.g.V('a@b.com').outE('owns').inV().has('label', 'report')
 
-let response = await db.execute<GremlinElement>(query)
+try {
+  await db.open()
+  let response = await db.runQuery<GremlinResponse<GremlinElement>>(query)
+  await db.close()
+} catch (e) {
+  console.error('Failed to connect to DB')
+}
 ```
 
 You'll notice that the syntax for creating a query via the `Query` object is very close the the syntax used with Gremlin bytecode.
 
 ## `DbConnection`
 
-| Method signature                                                  | Description                                                                        |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `constructor(config: DbConfig)`                                   | Instantiate a `DbConnection` object, but do not actually connect to the database   |
-| `open(): Promise`                                                 | Connect to the database                                                            |
-| `close(): Promise`                                                | Close connection to the database                                                   |
-| `runQuery<T>: Promise<GremlinResponse<T>>`                        | Run a Gremlin query against the database                                           |
-| `use(callback: (db: DbConnection) => void): Promise<void>`        | A convenience method for automatically opening and closing the database connection |
-| `execute<T>(query: string \| Query): Promise<GremlinResponse<T>>` | Opens the database, runs the specified query, then closes the database             |
+| Method signature                                           | Description                                                                        |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `constructor(config: DbConfig)`                            | Instantiate a `DbConnection` object, but do not actually connect to the database   |
+| `open(): Promise`                                          | Connect to the database                                                            |
+| `close(): Promise`                                         | Close connection to the database                                                   |
+| `runQuery<T>: Promise<T>`                                  | Run a Gremlin query against the database                                           |
+| `use(callback: (db: DbConnection) => void): Promise<void>` | A convenience method for automatically opening and closing the database connection |
 
 ## `Query`
 

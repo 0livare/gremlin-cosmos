@@ -17,8 +17,8 @@ export class Query {
   /////////////////////
 
   /** Get all vertices, or the vertex with a specific id. */
-  V(id?: string) {
-    this.query += `.V(${quoteAndCombine(id)})`
+  V(ids?: string | string[]) {
+    this.query += `.V(${quoteAndCombine(ids)})`
     return this
   }
 
@@ -217,7 +217,7 @@ export class Query {
    * to only those with one of the provided labels.
    */
   hasLabel(...labels: string[]) {
-    this.query += `hasLabel(${quoteAndCombine(labels)})`
+    this.query += `.hasLabel(${quoteAndCombine(labels)})`
     return this
   }
 
