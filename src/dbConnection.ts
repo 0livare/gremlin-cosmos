@@ -45,14 +45,4 @@ export class DbConnection {
 
     await this.close()
   }
-
-  async execute<T>(query: string | Query): Promise<GremlinResponse<T>> {
-    let r = null
-
-    await this.use(async graph => {
-      r = await graph.runQuery(query)
-    })
-
-    return r
-  }
 }
