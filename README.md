@@ -56,13 +56,13 @@ You'll notice that the syntax for creating a query via the `Query` object is ver
 
 ## `DbConnection`
 
-| Method signature                                                  | Description                                                                        |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `constructor(config: DbConfig)`                                   | Instantiate a `DbConnection` object, but do not actually connect to the database   |
-| `open(): Promise`                                                 | Connect to the database                                                            |
-| `close(): Promise`                                                | Close connection to the database                                                   |
-| `runQuery<T>: Promise<GremlinResponse<T>>`                        | Run a Gremlin query against the database                                           |
-| `use(callback: (db: DbConnection) => void): Promise<void>`        | A convenience method for automatically opening and closing the database connection |
+| Method signature                                           | Description                                                                        |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `constructor(config: DbConfig)`                            | Instantiate a `DbConnection` object, but do not actually connect to the database   |
+| `open(): Promise`                                          | Connect to the database                                                            |
+| `close(): Promise`                                         | Close connection to the database                                                   |
+| `runQuery<T>: Promise<T>`                                  | Run a Gremlin query against the database                                           |
+| `use(callback: (db: DbConnection) => void): Promise<void>` | A convenience method for automatically opening and closing the database connection |
 
 ## `Query`
 

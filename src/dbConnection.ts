@@ -1,6 +1,6 @@
 import * as Gremlin from 'gremlin'
 
-import {GremlinResponse, DbConfig} from './types'
+import {DbConfig} from './types'
 import {isAPromise} from './util'
 import {Query} from './query'
 
@@ -32,7 +32,7 @@ export class DbConnection {
   async runQuery<T>(
     query: string | Query,
     data = {},
-  ): Promise<GremlinResponse<T>> {
+  ): Promise<T> {
     let strQuery = query instanceof Query ? query.toString() : query
     return await this.client.submit(strQuery, data)
   }
