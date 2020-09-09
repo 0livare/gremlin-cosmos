@@ -17,8 +17,8 @@ export class Query {
   /////////////////////
 
   /** Get all vertices, or the vertex with a specific id. */
-  V(ids?: string | string[]) {
-    this.query += `.V(${quoteAndCombine(ids)})`
+  V(...ids: string[]) {
+    this.query += `.V(${quoteAndCombine(...ids)})`
     return this
   }
 
@@ -107,7 +107,7 @@ export class Query {
    * with `as` in the traversal.
    */
   select(...labels: string[]) {
-    this.query += `.select(${quoteAndCombine(labels)})`
+    this.query += `.select(${quoteAndCombine(...labels)})`
     return this
   }
 
@@ -125,7 +125,7 @@ export class Query {
 
   /** Extracts the values of properties from a selection of elements. */
   values(...keys: string[]) {
-    this.query += `.values(${quoteAndCombine(keys)})`
+    this.query += `.values(${quoteAndCombine(...keys)})`
     return this
   }
 
@@ -135,13 +135,13 @@ export class Query {
 
   /** Move to the outgoing adjacent vertices given the edge labels. */
   out(...edgeLabels: string[]) {
-    this.query += `.out(${quoteAndCombine(edgeLabels)})`
+    this.query += `.out(${quoteAndCombine(...edgeLabels)})`
     return this
   }
 
   /** Move to the incoming adjacent vertices given the edge labels. */
   in(...edgeLabels: string[]) {
-    this.query += `.in(${quoteAndCombine(edgeLabels)})`
+    this.query += `.in(${quoteAndCombine(...edgeLabels)})`
     return this
   }
 
@@ -150,19 +150,19 @@ export class Query {
    * adjacent vertices given the edge labels.
    */
   both(...edgeLabels: string[]) {
-    this.query += `.both(${quoteAndCombine(edgeLabels)})`
+    this.query += `.both(${quoteAndCombine(...edgeLabels)})`
     return this
   }
 
   /** Move to the outgoing incident edges given the edge labels. */
   outE(...edgeLabels: string[]) {
-    this.query += `.outE(${quoteAndCombine(edgeLabels)})`
+    this.query += `.outE(${quoteAndCombine(...edgeLabels)})`
     return this
   }
 
   /** Move to the incoming incident edges given the edge labels. */
   inE(...edgeLabels: string[]) {
-    this.query += `.inE(${quoteAndCombine(edgeLabels)})`
+    this.query += `.inE(${quoteAndCombine(...edgeLabels)})`
     return this
   }
 
@@ -170,7 +170,7 @@ export class Query {
    * Move to both the incoming and outgoing incident edges given the edge labels.
    */
   bothE(...edgeLabels: string[]) {
-    this.query += `.bothE(${quoteAndCombine(edgeLabels)})`
+    this.query += `.bothE(${quoteAndCombine(...edgeLabels)})`
     return this
   }
 
@@ -217,7 +217,7 @@ export class Query {
    * to only those with one of the provided labels.
    */
   hasLabel(...labels: string[]) {
-    this.query += `.hasLabel(${quoteAndCombine(labels)})`
+    this.query += `.hasLabel(${quoteAndCombine(...labels)})`
     return this
   }
 
@@ -226,7 +226,7 @@ export class Query {
    * to only those with one of the provided ids.
    */
   hasId(...labels: string[]) {
-    this.query += `hasId(${quoteAndCombine(labels)})`
+    this.query += `.hasId(${quoteAndCombine(...labels)})`
     return this
   }
 
@@ -235,7 +235,7 @@ export class Query {
    * to only those with **all** of the provided keys.
    */
   hasKey(...keys: string[]) {
-    this.query += `hasKey(${quoteAndCombine(keys)})`
+    this.query += `.hasKey(${quoteAndCombine(...keys)})`
     return this
   }
 
@@ -244,7 +244,7 @@ export class Query {
    * to only those with **all** of the provided values.
    */
   hasValue(...values: string[]) {
-    this.query += `hasValue(${quoteAndCombine(values)})`
+    this.query += `.hasValue(${quoteAndCombine(...values)})`
     return this
   }
 
@@ -253,7 +253,7 @@ export class Query {
    * to only those without a certain key.
    */
   hasNot(key: string) {
-    this.query += `hasNot('${key}')`
+    this.query += `.hasNot('${key}')`
     return this
   }
 
@@ -262,7 +262,7 @@ export class Query {
    * are equal to a value.
    */
   is(eq: number) {
-    this.query += `is(${eq})`
+    this.query += `.is(${eq})`
     return this
   }
 
@@ -271,7 +271,7 @@ export class Query {
    * are greater than a value.
    */
   isGt(min: number) {
-    this.query += `is(gt(${min}))`
+    this.query += `.is(gt(${min}))`
     return this
   }
 
@@ -280,7 +280,7 @@ export class Query {
    * are less than a value.
    */
   isLt(max: number) {
-    this.query += `is(lt(${max}))`
+    this.query += `.is(lt(${max}))`
     return this
   }
 
@@ -289,7 +289,7 @@ export class Query {
    * are greater than or equal to a value.
    */
   isGte(min: number) {
-    this.query += `is(gte(${min}))`
+    this.query += `.is(gte(${min}))`
     return this
   }
 
@@ -298,7 +298,7 @@ export class Query {
    * are less than or equal to a value.
    */
   isLte(max: number) {
-    this.query += `is(lte(${max}))`
+    this.query += `.is(lte(${max}))`
     return this
   }
 
@@ -307,7 +307,7 @@ export class Query {
    * are between two values.
    */
   isInside(min: number, max: number) {
-    this.query += `is(inside(${min}))`
+    this.query += `.is(inside(${min}))`
     return this
   }
 
@@ -326,7 +326,7 @@ export class Query {
    * the current selection.
    */
   range(minIndex: number, maxIndex: number) {
-    this.query += `range(${minIndex}, ${maxIndex})`
+    this.query += `.range(${minIndex}, ${maxIndex})`
     return this
   }
 
@@ -335,7 +335,7 @@ export class Query {
    * first n elements.
    */
   limit(n: number) {
-    this.query += `limit(${n})`
+    this.query += `.limit(${n})`
     return this
   }
 
@@ -344,7 +344,7 @@ export class Query {
    * last n elements.
    */
   tail(n: number) {
-    this.query += `tail(${n})`
+    this.query += `.tail(${n})`
     return this
   }
 
@@ -373,7 +373,7 @@ export class Query {
    * array of all properties.
    */
   properties(key?: string) {
-    this.query += `properties(${quoteAndCombine(key)})`
+    this.query += `.properties(${quoteAndCombine(key)})`
     return this
   }
 
@@ -382,7 +382,7 @@ export class Query {
    * current selection as a map. Returns one map per element.
    */
   propertyMap() {
-    this.query += `propertyMap()`
+    this.query += `.propertyMap()`
     return this
   }
 
@@ -391,7 +391,7 @@ export class Query {
    * selection from the graph.
    */
   drop() {
-    this.query += `drop()`
+    this.query += `.drop()`
     return this
   }
 
@@ -405,7 +405,7 @@ export class Query {
    * e.g. `select()`, `match()`.
    */
   as(label: string) {
-    this.query += `as(${quoteAndCombine(label)})`
+    this.query += `.as(${quoteAndCombine(label)})`
     return this
   }
 
@@ -415,7 +415,7 @@ export class Query {
    * they are added.
    */
   by(key: string) {
-    this.query += `by(${quoteAndCombine(key)})`
+    this.query += `.by(${quoteAndCombine(key)})`
     return this
   }
 
