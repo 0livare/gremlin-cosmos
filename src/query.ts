@@ -353,16 +353,28 @@ export class Query {
   // Side effect steps
   /////////////////////
 
-  /** Add a property to an element. */
-  property(key: string | Index, value?: string) {
+  /** 
+   * Add a property to an element.
+   * 
+   * An object can optionally be passed to this function.
+   * Each key-value pair that exists in the object will 
+   * be added as if it were called with `.property(key, value)`
+   * unless the value is `null` or `undefined`, in which 
+   * case it will not be added.
+   */
+  property(key: string | Index, value?: string | number | boolean) {
     if (typeof key === 'string') {
       this.query += `.property(${quoteAndCombine(key, value)})`
       return this
     }
 
     let map: Index = key
-    for (let k in map) {
-      this.property(k, map[k])
+    if (typeof map !== 'object' || map === null || Array.isArray(map)) return this
+
+    for (let key in map) {
+      let value = map[key]
+      if (value === null || value === undefined) continue
+      this.property(key, value)
     }
 
     return this

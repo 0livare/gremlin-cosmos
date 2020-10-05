@@ -91,3 +91,35 @@ describe('.id()', () => {
     expect(Query.g.id()).toBeInstanceOf(Query)
   })
 })
+
+describe('.property()', () => {
+  it('takes a key and a value', () => {
+    let q = Query.g.property('foo', 'bar')
+    expect(q.toString()).toBe("g.property('foo', 'bar')")
+  })
+
+  it('ignores null', () => {
+    let q = Query.g.property(null)
+    expect(q.toString()).toBe("g")
+  }) 
+
+  it('ignores an array', () => {
+    let q = Query.g.property([] as any)
+    expect(q.toString()).toBe("g")
+  }) 
+
+  it('accepts an object', () => {
+    let q = Query.g.property({foo: 'oof', bar: 'rab'})
+    expect(q.toString()).toBe("g.property('foo', 'oof').property('bar', 'rab')")
+  })
+
+  it('ignores null values within an object', () => {
+    let q = Query.g.property({foo: 'bar', bar: null})
+    expect(q.toString()).toBe("g.property('foo', 'bar')")
+  })
+
+  it('ignores undefined values within an object', () => {
+    let q = Query.g.property({foo: 'bar', bar: undefined})
+    expect(q.toString()).toBe("g.property('foo', 'bar')")
+  })
+})
