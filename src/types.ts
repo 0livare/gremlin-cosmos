@@ -25,4 +25,4 @@ export type GremlinResponse<T> = {
   }
 }
 
-export type Index = {[key: string]: string}
+export type Index = {[key: string]: string | number | boolean}
