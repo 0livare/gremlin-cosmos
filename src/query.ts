@@ -1,4 +1,5 @@
 import {Index} from './types'
+import {quoteAndCombine} from './util'
 
 export class Query {
   private query: string = 'g'
@@ -18,7 +19,7 @@ export class Query {
 
   /** Get all vertices, or the vertex with a specific id. */
   V(...ids: string[]) {
-    this.query += `.V(${quoteAndCombine(...ids)})`
+    this.query += `.V(${quoteAndCombine(ids)})`
     return this
   }
 
@@ -107,7 +108,7 @@ export class Query {
    * with `as` in the traversal.
    */
   select(...labels: string[]) {
-    this.query += `.select(${quoteAndCombine(...labels)})`
+    this.query += `.select(${quoteAndCombine(labels)})`
     return this
   }
 
@@ -125,7 +126,7 @@ export class Query {
 
   /** Extracts the values of properties from a selection of elements. */
   values(...keys: string[]) {
-    this.query += `.values(${quoteAndCombine(...keys)})`
+    this.query += `.values(${quoteAndCombine(keys)})`
     return this
   }
 
@@ -135,13 +136,13 @@ export class Query {
 
   /** Move to the outgoing adjacent vertices given the edge labels. */
   out(...edgeLabels: string[]) {
-    this.query += `.out(${quoteAndCombine(...edgeLabels)})`
+    this.query += `.out(${quoteAndCombine(edgeLabels)})`
     return this
   }
 
   /** Move to the incoming adjacent vertices given the edge labels. */
   in(...edgeLabels: string[]) {
-    this.query += `.in(${quoteAndCombine(...edgeLabels)})`
+    this.query += `.in(${quoteAndCombine(edgeLabels)})`
     return this
   }
 
@@ -150,19 +151,19 @@ export class Query {
    * adjacent vertices given the edge labels.
    */
   both(...edgeLabels: string[]) {
-    this.query += `.both(${quoteAndCombine(...edgeLabels)})`
+    this.query += `.both(${quoteAndCombine(edgeLabels)})`
     return this
   }
 
   /** Move to the outgoing incident edges given the edge labels. */
   outE(...edgeLabels: string[]) {
-    this.query += `.outE(${quoteAndCombine(...edgeLabels)})`
+    this.query += `.outE(${quoteAndCombine(edgeLabels)})`
     return this
   }
 
   /** Move to the incoming incident edges given the edge labels. */
   inE(...edgeLabels: string[]) {
-    this.query += `.inE(${quoteAndCombine(...edgeLabels)})`
+    this.query += `.inE(${quoteAndCombine(edgeLabels)})`
     return this
   }
 
@@ -170,7 +171,7 @@ export class Query {
    * Move to both the incoming and outgoing incident edges given the edge labels.
    */
   bothE(...edgeLabels: string[]) {
-    this.query += `.bothE(${quoteAndCombine(...edgeLabels)})`
+    this.query += `.bothE(${quoteAndCombine(edgeLabels)})`
     return this
   }
 
@@ -217,7 +218,7 @@ export class Query {
    * to only those with one of the provided labels.
    */
   hasLabel(...labels: string[]) {
-    this.query += `.hasLabel(${quoteAndCombine(...labels)})`
+    this.query += `.hasLabel(${quoteAndCombine(labels)})`
     return this
   }
 
@@ -226,7 +227,7 @@ export class Query {
    * to only those with one of the provided ids.
    */
   hasId(...labels: string[]) {
-    this.query += `.hasId(${quoteAndCombine(...labels)})`
+    this.query += `.hasId(${quoteAndCombine(labels)})`
     return this
   }
 
@@ -235,7 +236,7 @@ export class Query {
    * to only those with **all** of the provided keys.
    */
   hasKey(...keys: string[]) {
-    this.query += `.hasKey(${quoteAndCombine(...keys)})`
+    this.query += `.hasKey(${quoteAndCombine(keys)})`
     return this
   }
 
@@ -244,7 +245,7 @@ export class Query {
    * to only those with **all** of the provided values.
    */
   hasValue(...values: string[]) {
-    this.query += `.hasValue(${quoteAndCombine(...values)})`
+    this.query += `.hasValue(${quoteAndCombine(values)})`
     return this
   }
 
@@ -430,11 +431,4 @@ export class Query {
     this.query += `.to(${target.toString()})`
     return this
   }
-}
-
-function quoteAndCombine(...args) {
-  return args
-    .filter(arg => arg)
-    .map(arg => `'${arg}'`)
-    .join(', ')
 }
