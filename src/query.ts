@@ -362,7 +362,7 @@ export class Query {
    * unless the value is `null` or `undefined`, in which 
    * case it will not be added.
    */
-  property(key: string | Index, value?: string) {
+  property(key: string | Index, value?: string | number | boolean) {
     if (typeof key === 'string') {
       this.query += `.property(${quoteAndCombine(key, value)})`
       return this
