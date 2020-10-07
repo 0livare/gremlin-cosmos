@@ -435,13 +435,23 @@ export class Query {
 
   /** Specify the source vertex of an edge. */
   from(target: string | Query) {
-    this.query += `.from(${quoteAndCombine(target.toString())})`
+    // If the passed in target is a string we need to add quotes, otherwise use the
+    // Query.toString() to stringify the Query
+    let stringifiedTarget =
+      typeof target === 'string' ? quoteAndCombine(target) : target.toString()
+
+    this.query += `.from(${stringifiedTarget})`
     return this
   }
 
   /** Specify the destination vertex of an edge. */
   to(target: string | Query) {
-    this.query += `.to(${quoteAndCombine(target.toString())})`
+    // If the passed in target is a string we need to add quotes, otherwise use the
+    // Query.toString() to stringify the Query
+    let stringifiedTarget =
+      typeof target === 'string' ? quoteAndCombine(target) : target.toString()
+
+    this.query += `.to(${stringifiedTarget})`
     return this
   }
 }
