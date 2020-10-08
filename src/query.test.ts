@@ -100,13 +100,13 @@ describe('.property()', () => {
 
   it('ignores null', () => {
     let q = Query.g.property(null)
-    expect(q.toString()).toBe("g")
-  }) 
+    expect(q.toString()).toBe('g')
+  })
 
   it('ignores an array', () => {
     let q = Query.g.property([] as any)
-    expect(q.toString()).toBe("g")
-  }) 
+    expect(q.toString()).toBe('g')
+  })
 
   it('accepts an object', () => {
     let q = Query.g.property({foo: 'oof', bar: 'rab'})
@@ -121,5 +121,52 @@ describe('.property()', () => {
   it('ignores undefined values within an object', () => {
     let q = Query.g.property({foo: 'bar', bar: undefined})
     expect(q.toString()).toBe("g.property('foo', 'bar')")
+  })
+})
+
+describe('.as()', () => {
+  it('it takes a label as a string', () => {
+    let q = Query.g.V('foo').as('bar')
+    expect(q.toString()).toBe("g.V('foo').as('bar')")
+  })
+})
+
+describe('.by()', () => {
+  it('it takes a label as a string', () => {
+    let q = Query.g.V('foo').by('bar')
+    expect(q.toString()).toBe("g.V('foo').by('bar')")
+  })
+})
+
+describe('.by()', () => {
+  it('it takes a key as a string', () => {
+    let q = Query.g.V('foo').by('bar')
+    expect(q.toString()).toBe("g.V('foo').by('bar')")
+  })
+})
+
+describe('.from()', () => {
+  it('it takes a target as a string', () => {
+    let q = Query.g.V('foo').addE('bar').from('source')
+    expect(q.toString()).toBe("g.V('foo').addE('bar').from('source')")
+  })
+
+  it('it takes a target as a query', () => {
+    let target = Query.g.V('target')
+    let q = Query.g.V('foo').addE('bar').from(target)
+    expect(q.toString()).toBe("g.V('foo').addE('bar').from(g.V('target'))")
+  })
+})
+
+describe('.to()', () => {
+  it('it takes a target as a string', () => {
+    let q = Query.g.V('foo').addE('bar').to('source')
+    expect(q.toString()).toBe("g.V('foo').addE('bar').to('source')")
+  })
+
+  it('it takes a target as a query', () => {
+    let target = Query.g.V('target')
+    let q = Query.g.V('foo').addE('bar').to(target)
+    expect(q.toString()).toBe("g.V('foo').addE('bar').to(g.V('target'))")
   })
 })
