@@ -1,6 +1,6 @@
 {
   "name": "gremlin-cosmos",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A Node.js Gremlin API compatible with Cosmos DB",
   "main": "dist/index.js",
   "repository": "https://github.com/zposten/gremlin-cosmos",
@@ -12,7 +12,10 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "prepub": "yarn test && yarn build && yarn version",
+    "pub": "npm publish",
+    "postpub": "git push && git push --tags"
   },
   "dependencies": {
     "gremlin": "^3.4.7",
