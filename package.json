@@ -12,7 +12,10 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "prepub": "yarn test && yarn build && yarn version",
+    "pub": "npm publish",
+    "postpub": "git push && git push --tags"
   },
   "dependencies": {
     "gremlin": "^3.4.7",
