@@ -12,7 +12,7 @@ export type GremlinNode = {
   properties: {[key: string]: Array<{id: string; value: string}>}
 }
 
-export type GremlinResponse<T> = {
+export type GremlinResponse<T = GremlinNode> = {
   _items: T[]
   length: number
   attributes: {
