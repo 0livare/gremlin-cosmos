@@ -1,6 +1,6 @@
 {
   "name": "gremlin-cosmos",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A Node.js Gremlin API compatible with Cosmos DB",
   "main": "dist/index.js",
   "repository": "https://github.com/zposten/gremlin-cosmos",
