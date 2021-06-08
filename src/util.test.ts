@@ -42,6 +42,10 @@ describe('quoteAndCombine', () => {
         "'zach', 'ryan', 'lola'",
       )
     })
+
+    it('quotes a single argument which is empty string', () => {
+      expect(quoteAndCombine('')).toEqual("''");
+    })
   })
 
   describe('when explicitly passing an array', () => {
