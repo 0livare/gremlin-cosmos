@@ -122,6 +122,14 @@ describe('.property()', () => {
     let q = Query.g.property({foo: 'bar', bar: undefined})
     expect(q.toString()).toBe("g.property('foo', 'bar')")
   })
+
+  it('allows empty string as property value', () => {
+    let q1 = Query.g.property('foo', '')
+    expect(q1.toString()).toBe("g.property('foo', '')")
+  
+    let q2 = Query.g.property({bar: ''})
+    expect(q2.toString()).toBe("g.property('bar', '')")
+  })
 })
 
 describe('.as()', () => {
