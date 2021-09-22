@@ -18,7 +18,7 @@
     "postpub": "git push && git push --tags"
   },
   "dependencies": {
-    "gremlin": "^3.4.7",
+    "gremlin": "^3.5.1",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
